@@ -1,0 +1,45 @@
+#include <iostream>
+#include <unordered_map>
+#include <string>
+using namespace std;
+
+int minTransformations(string s, string s1) {
+    if (s.length() != s1.length()) return -1;
+
+    unordered_map<char, int> countS, countS1;
+
+    for (char c : s) countS[c]++;
+    for (char c : s1) countS1[c]++;
+
+    // Check if both strings have the same characters with the same frequency
+    if (countS != countS1) return -1;
+
+    int n = s.length();
+    int suffixMatchLength = 0;
+
+    for (int i = 1; i <= n; ++i) {
+        if (s.substr(n - i) == s1.substr(n - i)) {
+            suffixMatchLength = i;
+        } else {
+            break;
+        }
+    }
+
+    return n - suffixMatchLength;
+}
+
+int main() {
+    string s, s1;
+    getline(cin, s);
+    getline(cin, s1);
+
+    int result = minTransformations(s, s1);
+
+    if (result == -1) {
+        cout << "The string cannot be transformed" << endl;
+    } else {
+        cout << result << endl;
+    }
+
+    return 0;
+}
