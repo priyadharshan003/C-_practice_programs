@@ -2,6 +2,7 @@
 #include <sstream>
 #include <queue>
 #include <string>
+using namespace std;
 
 int main() {
     string names = "Sara,Bob,Simona,David,Selena,Mark,Samantha";
