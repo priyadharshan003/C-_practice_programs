@@ -1,47 +1,51 @@
-
 #include <bits/stdc++.h>
+
 using namespace std;
 
-// Function to solve the problem using dynamic programming
-int solveUtil(int n, vector<int>& arr, vector<int>& dp) {
-    // Base case: If there are no elements in the array, return 0
-    dp[0] = arr[0];
+long long int solve(vector<int>& arr){
+    int n = arr.size();
+    long long int prev = arr[0];
+    long long int prev2 =0;
     
-    // Iterate through the elements of the array
-    for (int i = 1; i < n; i++) {
-        // Calculate the maximum value by either picking the current element
-        // or not picking it 
-        int pick = arr[i];
-        if (i > 1)
-            pick += dp[i - 2];
-        int nonPick = dp[i - 1];
+    for(int i=1; i<n; i++){
+        long long int pick = arr[i];
+        if(i>1)
+            pick += prev2;
+        int long long nonPick = 0 + prev;
         
-        // Store the maximum value in the dp array
-        dp[i] = max(pick, nonPick);
+        long long int cur_i = max(pick, nonPick);
+        prev2 = prev;
+        prev= cur_i;
+        
     }
-    
-    // The last element of the dp array will contain the maximum sum
-    return dp[n - 1];
+    return prev;
 }
 
-// Function to initiate the solving process
-int solve(int n, vector<int>& arr) {
-    vector<int> dp(n, 0); 
-    return solveUtil(n, arr, dp);
+long long int robStreet(int n, vector<int> &arr){
+    vector<int> arr1;
+    vector<int> arr2;
+    
+    if(n==1)
+       return arr[0];
+    
+    for(int i=0; i<n; i++){
+        
+        if(i!=0) arr1.push_back(arr[i]);
+        if(i!=n-1) arr2.push_back(arr[i]);
+    }
+    
+    long long int ans1 = solve(arr1);
+    long long int ans2 = solve(arr2);
+    
+    return max(ans1,ans2);
 }
+
 
 int main() {
-    vector<int> arr{2, 1, 4, 9};
-    int n = arr.size();
-    vector<int>a1,a2;
-    
-    for(int i = 0;i<n;i++){
-        if(arr[i]!=0) a1.push_back(arr[i]);
-        if(arr[i]!=n-1) a2.push_back(arr[i]);
-    }
-    
-    cout<<max(solve(n, a1),solve(n,a2));
 
-    return 0;
+  vector<int> arr{2, 1, 4,9,11};
+  int n=arr.size();
+  cout<<robStreet(n,arr);
 }
+
 
