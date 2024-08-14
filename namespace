@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+namespace FirstNamespace {
+    void printMessage() {
+        cout << "Hello from the first namespace!" << endl;
+    }
+}
+
+namespace SecondNamespace {
+    void printMessage() {
+        cout << "Hello from the second namespace!" << endl;
+    }
+}
+
+int main() {
+    FirstNamespace::printMessage();
+    SecondNamespace::printMessage();
+
+    // You can also use 'using' to avoid typing the namespace each time
+    // using namespace FirstNamespace;
+    // printMessage();  // Calls FirstNamespace::printMessage
+    
+    // using namespace SecondNamespace;
+    // printMessage();
+
+    return 0;
+}
