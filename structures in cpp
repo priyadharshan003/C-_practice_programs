@@ -1,0 +1,21 @@
+//structures in C++
+
+#include<iostream>
+using namespace std;
+//#include<stdio.h>
+
+struct demo{
+    int num;
+    char name[5] = "pri";
+    
+    void print(){
+        cout<<num<<" : "<<name;
+    }
+};
+int main(){
+    
+    demo stud;
+    stud.print();
+    
+    return 0;
+}
